@@ -118,7 +118,7 @@ public class Main {
     }
 
     public static void nakemiin() throws InterruptedException {
-        System.out.println("Suljetaan ohjelma turvallisesti");
+        System.out.println("Suljetaan ohjelma turvallisesti"); // Lisätään kommentti niin nähdään meneekö oikeaan branchiin
         Thread.sleep(2000);
         System.exit(1);
     }

@@ -14,7 +14,6 @@ public class Main {
 
         if (komentorivi == null){
             System.out.println("Ohjelma vaatii toimiakseen komentoriviä. Ajathan ohjelman tätä kautta.");
-            System.out.println("pööp");
             return;
         }
 

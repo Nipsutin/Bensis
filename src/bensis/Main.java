@@ -119,7 +119,7 @@ public class Main {
     public static void nakemiin() throws InterruptedException {
         System.out.println("Suljetaan ohjelma turvallisesti");
         Thread.sleep(2000);
-        System.exit(1);
+        System.exit(1); // Testikommentti että näkee, toimiiko tää pirun gitti-importti
     }
 }
 

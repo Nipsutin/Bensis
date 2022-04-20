@@ -76,7 +76,7 @@ public class Main {
 
             if (paatos == 2){
                 Thread.sleep(500);
-                System.out.println("Syotetaan uusia hintoja, hetki \n \n");
+                System.out.println("Siirrytään syöttämään hintoja \n \n");
                 Thread.sleep(3000);
                 syotaHinnat();
             }
@@ -86,8 +86,37 @@ public class Main {
             }
     }
     public static void syotaHinnat() throws InterruptedException, FileNotFoundException {
-        System.out.println("Hintojen päivitys on poissa huoltokatkon myötä. Koitathan myöhemmin uudelleen. Palataan automaattisesti päävalikkoon.");
-        paaValikko();
+
+
+        Scanner hintapaivittaja = new Scanner(System.in);
+        Double hinta;
+
+        System.out.print("Anna laadun 95 uusi hinta: ");
+        Double ysiviisuusi = hintapaivittaja.nextDouble();
+
+        System.out.print("Anna laadun 98 uusi hinta: ");
+        Double ysikasiuusi = hintapaivittaja.nextDouble();
+
+        System.out.print("Anna laadun diesel uusi hinta: ");
+        Double dieseluusi = hintapaivittaja.nextDouble();
+
+        try{
+
+            File uudethinnat = new File("resources\\hinnat.txt");
+
+            PrintWriter kirjoita = new PrintWriter(uudethinnat);
+            kirjoita.write("\n");
+            kirjoita.write("95;"+ysiviisuusi+"\n");
+            kirjoita.write("98;"+ysikasiuusi+"\n");
+            kirjoita.write("Diesel;"+dieseluusi+"\n");
+            kirjoita.close();
+        }
+
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Hinnat päivitetty tolpalle.");
+        haluatkoJatkaa();
     }
 
     public static void naytaHinnat() throws InterruptedException, FileNotFoundException {
@@ -104,6 +133,12 @@ public class Main {
 
             System.out.println("Tuotteen " + tyyppi + " litrahinta tolpassa on " + litrahinta + " euroa litralta.");
         }
+        haluatkoJatkaa();
+    }
+
+    public static void haluatkoJatkaa() throws InterruptedException, FileNotFoundException {
+
+        Scanner lukija = new Scanner(System.in);
         System.out.println("Haluatko jatkaa ohjelman suorittamista? y/n");
 
         String vastaus = lukija.nextLine();

@@ -1,5 +1,4 @@
 package bensis;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,8 +6,17 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * @version 0.0.1
+ * @author Malila Valtteri, Käyhkö Joona
+ *
+ * Ohjelma toimii kuvitteellisen polttoaineaseman hintanäytön hallintatyökaluna. Ohjelmalla voidaan näyttää hinnat tolpassa sekä päivittää tiedot
+ *
+ */
+
+/**
  * The type Main.
  */
+
 public class Main {
 
     /**
@@ -17,6 +25,7 @@ public class Main {
      * @param args the input arguments
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
+     *
      */
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
     Scanner lukija = new Scanner(System.in);
@@ -32,13 +41,15 @@ public class Main {
     }
 
     /**
-     * Lue kirjautuminen.
+     * Lue kirjautuminen. Käyttäjältä kysytään salasana, ja mikäli se syötetään oikein, näytetään päävalikko. Jos salasana näytetään väärin, mennään takaisin salasanan syöttöön.
      *
-     * @param salasana the salasana
+     * @param salasana Lukee salasanan sisällön käyttäjän syötteestä ja tarkistaa vastaako se ennaltamääriteltyä salasanasyötettä
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
      */
+
     public static void lueKirjautuminen(String salasana) throws InterruptedException, FileNotFoundException {
+
         String passu = "Keke", syote;
         do {
                 System.out.print("Anna salasanasi: ");
@@ -46,40 +57,35 @@ public class Main {
                 
         }
         while (!syote.equals(passu));
-        String onnistunut = "\nKirjautuminen onnistui";
+
+        String onnistunut = "\nKirjautuminen onnistui"; // Määritetään teksti, joka tullaan näyttämään käyttäjälle kirjautumisen onnistuttua
         
-        int laskeKirjaimet = onnistunut.length();
+        int laskeKirjaimet = onnistunut.length(); // Lasketaan onnistunut - merkkimäärä
         for (int i = 0; i < laskeKirjaimet; i++){
-            System.out.print("=");
+            System.out.print("="); // Tulostetaan yhtäsuurimerkit kirjautumisen onnistumisen kunniaksi tekstin alle
         }
 
-        System.out.println(onnistunut);
+        System.out.println(onnistunut); // Annetaan onnistunut tekstisyöte käyttäjälle
+        Thread.sleep(1000); // Odotetaan sekuntti ennen päävalikon avaamista
 
-            try{
-                Thread.sleep(1000);
-            }
-
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        paaValikko();
+        paaValikko(); // Avataan metodi paaValikko();
     }
 
     /**
-     * PaaValikko.
+     * PaaValikko. Nöytetään ohjelman päävalikko, josta voidaan valita toiminnallisuudet
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
      */
+
     public static void paaValikko() throws InterruptedException, FileNotFoundException {
 
         System.out.println("Valitse toiminto");
-        Thread.sleep(300);
+        Thread.sleep(300); // Odotetaan 0,3 sekuntia ennen seuraavan toiminnon tulostamista
         System.out.println("1) Tarkista hinnat");
-        Thread.sleep(500);
+        Thread.sleep(500); // Odotetaan 0,5 sekuntia ennen seuraavan toiminnon tulostamista
         System.out.println("2) Syota uudet hinnat");
-        Thread.sleep(500);
+        Thread.sleep(500); // Odotetaan 0,5 sekuntia ennen seuraavan toiminnon tulostamista
         System.out.println("3) Lopeta ohjelma");
         int paatos = Integer.parseInt(System.console().readLine());
 
@@ -88,13 +94,13 @@ public class Main {
                 System.out.print("Valitsit hintojen tarkistamisen. Ladataan hintatietoja, odota hetki");
                 for(int i = 0; i < 5; ++i) {
                     Thread.sleep(500);
-                    System.out.print("...");
+                    System.out.print("..."); // Tulostetaan käyttäjälle hieno pisteanimaatio ja uskotellaan, että koodi hakisi jotain isoa ja suurta
                     Thread.sleep(400);
                 }
-                System.out.println("\nLataus suoritettu onnistuneesti\n");
+                System.out.println("\nLataus suoritettu onnistuneesti\n"); // Näytetään onnistunut latausviesti
 
 
-                naytaHinnat();
+                naytaHinnat(); // Haetaan hinnat naytaHinnat(); metodilla
             }
 
             if (paatos == 2){
@@ -133,14 +139,14 @@ public class Main {
 
         try{
 
-            File uudethinnat = new File("resources\\hinnat.txt");
+            File uudethinnat = new File("resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
 
             PrintWriter kirjoita = new PrintWriter(uudethinnat);
             kirjoita.write("\n");
             kirjoita.write("95;"+ysiviisuusi+"\n");
             kirjoita.write("98;"+ysikasiuusi+"\n");
             kirjoita.write("Diesel;"+dieseluusi+"\n");
-            kirjoita.close();
+            kirjoita.close(); // Suljetaan kirjoitin kirjoituksen päättymisen myötä ja tallennetaan tiedot
         }
 
         catch (IOException e) {
@@ -202,10 +208,10 @@ public class Main {
      *
      * @throws InterruptedException the interrupted exception
      */
+
     public static void nakemiin() throws InterruptedException {
-        System.out.println("Suljetaan ohjelma turvallisesti"); // Lisätään kommentti niin nähdään meneekö oikeaan branchiin
+        System.out.println("Suljetaan ohjelma turvallisesti");
         Thread.sleep(2000);
         System.exit(1);
     }
 }
-

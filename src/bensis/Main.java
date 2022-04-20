@@ -6,22 +6,38 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * The type Main.
+ */
 public class Main {
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     * @throws InterruptedException  the interrupted exception
+     * @throws FileNotFoundException the file not found exception
+     */
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
     Scanner lukija = new Scanner(System.in);
     Console komentorivi = System.console();
 
-        if (komentorivi == null){
+        if (komentorivi == null){ // Tarkistetaan, onko käyttäjä käyttämässä ohjelmaa komentorivillä. Mikäli ei, annetaan virheilmoitus eikä jatketa ohjelman suroittamista
             System.out.println("Ohjelma vaatii toimiakseen komentoriviä. Ajathan ohjelman tätä kautta.");
-            System.out.println("pööp");
             return;
         }
-
         // Luetaan käyttäjän salasana
         String salasana = null;
         lueKirjautuminen(salasana);
     }
+
+    /**
+     * Lue kirjautuminen.
+     *
+     * @param salasana the salasana
+     * @throws InterruptedException  the interrupted exception
+     * @throws FileNotFoundException the file not found exception
+     */
     public static void lueKirjautuminen(String salasana) throws InterruptedException, FileNotFoundException {
         String passu = "Keke", syote;
         do {
@@ -49,6 +65,13 @@ public class Main {
 
         paaValikko();
     }
+
+    /**
+     * PaaValikko.
+     *
+     * @throws InterruptedException  the interrupted exception
+     * @throws FileNotFoundException the file not found exception
+     */
     public static void paaValikko() throws InterruptedException, FileNotFoundException {
 
         System.out.println("Valitse toiminto");
@@ -85,6 +108,14 @@ public class Main {
                 nakemiin();
             }
     }
+
+    /**
+     * Syota hinnat.
+     *
+     * @throws InterruptedException  the interrupted exception
+     * @throws FileNotFoundException the file not found exception
+     */
+
     public static void syotaHinnat() throws InterruptedException, FileNotFoundException {
 
 
@@ -119,6 +150,13 @@ public class Main {
         haluatkoJatkaa();
     }
 
+    /**
+     * Nayta hinnat.
+     *
+     * @throws InterruptedException  the interrupted exception
+     * @throws FileNotFoundException the file not found exception
+     */
+
     public static void naytaHinnat() throws InterruptedException, FileNotFoundException {
         Main.class.getResourceAsStream("resources\\hinnat.txt");
         Scanner inputStream = new Scanner(new File("resources\\hinnat.txt"));
@@ -136,6 +174,13 @@ public class Main {
         haluatkoJatkaa();
     }
 
+    /**
+     * Haluatko jatkaa.
+     *
+     * @throws InterruptedException  the interrupted exception
+     * @throws FileNotFoundException the file not found exception
+     */
+
     public static void haluatkoJatkaa() throws InterruptedException, FileNotFoundException {
 
         Scanner lukija = new Scanner(System.in);
@@ -152,6 +197,11 @@ public class Main {
         }
     }
 
+    /**
+     * Nakemiin.
+     *
+     * @throws InterruptedException the interrupted exception
+     */
     public static void nakemiin() throws InterruptedException {
         System.out.println("Suljetaan ohjelma turvallisesti"); // Lisätään kommentti niin nähdään meneekö oikeaan branchiin
         Thread.sleep(2000);

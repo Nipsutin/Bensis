@@ -15,45 +15,40 @@ public class Main {
      * @param args the input arguments
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
-     *
      */
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
+        Console komentorivi = System.console();
 
-    Scanner lukija = new Scanner(System.in);
-    Console komentorivi = System.console();
-
-        if (komentorivi == null){ // Tarkistetaan, onko käyttäjä käyttämässä ohjelmaa komentorivillä. Mikäli ei, annetaan virheilmoitus eikä jatketa ohjelman suroittamista
+        if (komentorivi == null) { // Tarkistetaan, onko käyttäjä käyttämässä ohjelmaa komentorivillä. Mikäli ei, annetaan virheilmoitus eikä jatketa ohjelman suroittamista
             System.out.println("Ohjelma vaatii toimiakseen komentoriviä. Ajathan ohjelman tätä kautta.");
             return;
         }
         // Luetaan käyttäjän salasana
-        String salasana = null;
-        lueKirjautuminen(salasana);
+        lueKirjautuminen();
     }
 
     /**
      * Lue kirjautuminen. Käyttäjältä kysytään salasana, ja mikäli se syötetään oikein, näytetään päävalikko. Jos salasana näytetään väärin, mennään takaisin salasanan syöttöön.
      *
-     * @param salasana Lukee salasanan sisällön käyttäjän syötteestä ja tarkistaa vastaako se ennaltamääriteltyä salasanasyötettä
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
      */
 
-    public static void lueKirjautuminen(String salasana) throws InterruptedException, FileNotFoundException {
+    public static void lueKirjautuminen() throws InterruptedException, FileNotFoundException {
 
         String passu = "Keke", syote;
         do {
-                System.out.print("Anna salasanasi: ");
-                syote = String.valueOf(System.console().readPassword());
-                
+            System.out.print("Anna salasanasi: ");
+            syote = String.valueOf(System.console().readPassword());
+
         }
 
         while (!syote.equals(passu));
 
         String onnistunut = "\nKirjautuminen onnistui"; // Määritetään teksti, joka tullaan näyttämään käyttäjälle kirjautumisen onnistuttua
-        
+
         int laskeKirjaimet = onnistunut.length(); // Lasketaan onnistunut - merkkimäärä
-        for (int i = 0; i < laskeKirjaimet; i++){
+        for (int i = 0; i < laskeKirjaimet; i++) {
             System.out.print("="); // Tulostetaan yhtäsuurimerkit kirjautumisen onnistumisen kunniaksi tekstin alle
         }
 
@@ -79,12 +74,13 @@ public class Main {
         System.out.println("2) Syota uudet hinnat");
         Thread.sleep(500); // Odotetaan 0,5 sekuntia ennen seuraavan toiminnon tulostamista
         System.out.println("3) Lopeta ohjelma");
-        int paatos = Integer.parseInt(System.console().readLine());
+        try {
+            int paatos = Integer.parseInt(System.console().readLine());
 
-            if (paatos == 1){
+            if (paatos == 1) {
                 Thread.sleep(500);
                 System.out.print("Valitsit hintojen tarkistamisen. Ladataan hintatietoja, odota hetki");
-                for(int i = 0; i < 5; ++i) {
+                for (int i = 0; i < 5; ++i) {
                     Thread.sleep(500);
                     System.out.print("..."); // Tulostetaan käyttäjälle hieno pisteanimaatio ja uskotellaan, että koodi hakisi jotain isoa ja suurta
                     Thread.sleep(400);
@@ -95,16 +91,25 @@ public class Main {
                 naytaHinnat(); // Haetaan hinnat naytaHinnat(); metodilla
             }
 
-            if (paatos == 2){
+            if (paatos == 2) {
                 Thread.sleep(500);
                 System.out.println("Siirrytään syöttämään hintoja \n \n");
                 Thread.sleep(3000);
                 syotaHinnat();
             }
-            if (paatos == 3){
+            if (paatos == 3) {
                 nakemiin();
             }
+
+    } catch (NumberFormatException e) {
+            System.out.println("Virheellinen valinta, valitse numero väliltä 1-3");
+            paaValikko();
+        } catch (InterruptedException | FileNotFoundException e) {
+            System.out.println("Virhe");
+            paaValikko();
+        }
     }
+
 
     /**
      * Syota hinnat. Metodissa käyttäjä pystyy syöttämään päivitettävät hinnat järjestelmän ohjeistaessa käyttäjän läpi päivitysprosessista
@@ -115,7 +120,7 @@ public class Main {
 
     public static void syotaHinnat() throws InterruptedException, FileNotFoundException {
         Scanner hintapaivittaja = new Scanner(System.in);
-        Double hinta;
+
         try{
         System.out.print("Anna laadun 95 uusi hinta: ");
         double ysiviisuusi = hintapaivittaja.nextDouble();
@@ -158,7 +163,8 @@ public class Main {
 
     public static void naytaHinnat() throws InterruptedException, FileNotFoundException {
         Scanner hintaLukija = new Scanner(new File("resources\\hinnat.txt"));
-        String rivi = hintaLukija.nextLine();
+        String rivi;
+        hintaLukija.nextLine();
 
         while (hintaLukija.hasNextLine()){ // Toistetaan niin kauan, kun hintaLukija saa uuden arvon
             rivi = hintaLukija.nextLine(); // Luetaan hintatieto täydellisenä muuttujaan rivi

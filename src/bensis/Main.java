@@ -1,5 +1,6 @@
 package bensis;
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -115,9 +116,10 @@ public class Main {
     public static void syotaHinnat() throws InterruptedException, FileNotFoundException {
         Scanner hintapaivittaja = new Scanner(System.in);
         Double hinta;
-
+        try{
         System.out.print("Anna laadun 95 uusi hinta: ");
         double ysiviisuusi = hintapaivittaja.nextDouble();
+
 
         System.out.print("Anna laadun 98 uusi hinta: ");
         double ysikasiuusi = hintapaivittaja.nextDouble();
@@ -125,7 +127,7 @@ public class Main {
         System.out.print("Anna laadun diesel uusi hinta: ");
         double dieseluusi = hintapaivittaja.nextDouble();
 
-        try{
+
             File uudethinnat = new File("resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
             PrintWriter kirjoita = new PrintWriter(uudethinnat);
             kirjoita.write("\n");
@@ -135,12 +137,15 @@ public class Main {
             kirjoita.close(); // Suljetaan kirjoitin kirjoituksen päättymisen myötä ja tallennetaan tiedot
         }
 
-        catch (IOException e) {
-            e.printStackTrace(); // Napataan virheilmoitus talteen, mikäli hintojen lataamisessa tapahtuu jokin virhe
+        catch (InputMismatchException e) {
+            System.out.println("Virheellinen syöte, hintojen syöttö aloitetaan alusta. \nSyötäthän pelkästään numeroita sekä käytät desimaalierottimena pilkkua!");
+            syotaHinnat();
         }
 
 
-        System.out.println("Hinnat päivitetty tolpalle.");
+        System.out.println("Hinnat päivitetty tolpalle.\n");
+        Thread.sleep(500);
+        naytaHinnat();
         haluatkoJatkaa(); // Näytä kysymys käyttäjälle, jatketaanko ohjelman suorittamista vai ei
     }
 

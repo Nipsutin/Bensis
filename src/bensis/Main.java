@@ -1,17 +1,6 @@
 package bensis;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 import java.util.Scanner;
-
-/**
- * @version 0.0.1
- * @author Malila Valtteri, Käyhkö Joona
- *
- * Ohjelma toimii kuvitteellisen polttoaineaseman hintanäytön hallintatyökaluna. Ohjelmalla voidaan näyttää hinnat tolpassa sekä päivittää tiedot
- *
- */
 
 /**
  * The type Main.
@@ -28,6 +17,7 @@ public class Main {
      *
      */
     public static void main(String[] args) throws InterruptedException, FileNotFoundException {
+
     Scanner lukija = new Scanner(System.in);
     Console komentorivi = System.console();
 
@@ -56,6 +46,7 @@ public class Main {
                 syote = String.valueOf(System.console().readPassword());
                 
         }
+
         while (!syote.equals(passu));
 
         String onnistunut = "\nKirjautuminen onnistui"; // Määritetään teksti, joka tullaan näyttämään käyttäjälle kirjautumisen onnistuttua
@@ -109,38 +100,33 @@ public class Main {
                 Thread.sleep(3000);
                 syotaHinnat();
             }
-
             if (paatos == 3){
                 nakemiin();
             }
     }
 
     /**
-     * Syota hinnat.
+     * Syota hinnat. Metodissa käyttäjä pystyy syöttämään päivitettävät hinnat järjestelmän ohjeistaessa käyttäjän läpi päivitysprosessista
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
      */
 
     public static void syotaHinnat() throws InterruptedException, FileNotFoundException {
-
-
         Scanner hintapaivittaja = new Scanner(System.in);
         Double hinta;
 
         System.out.print("Anna laadun 95 uusi hinta: ");
-        Double ysiviisuusi = hintapaivittaja.nextDouble();
+        double ysiviisuusi = hintapaivittaja.nextDouble();
 
         System.out.print("Anna laadun 98 uusi hinta: ");
-        Double ysikasiuusi = hintapaivittaja.nextDouble();
+        double ysikasiuusi = hintapaivittaja.nextDouble();
 
         System.out.print("Anna laadun diesel uusi hinta: ");
-        Double dieseluusi = hintapaivittaja.nextDouble();
+        double dieseluusi = hintapaivittaja.nextDouble();
 
         try{
-
             File uudethinnat = new File("resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
-
             PrintWriter kirjoita = new PrintWriter(uudethinnat);
             kirjoita.write("\n");
             kirjoita.write("95;"+ysiviisuusi+"\n");
@@ -150,38 +136,38 @@ public class Main {
         }
 
         catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Napataan virheilmoitus talteen, mikäli hintojen lataamisessa tapahtuu jokin virhe
         }
+
+
         System.out.println("Hinnat päivitetty tolpalle.");
-        haluatkoJatkaa();
+        haluatkoJatkaa(); // Näytä kysymys käyttäjälle, jatketaanko ohjelman suorittamista vai ei
     }
 
     /**
-     * Nayta hinnat.
+     * Nayta hinnat. Haetaan käyttäjälle hinnat tiedostosta, pilkotaan tiedosto osiin ja tulostetaan käyttäjälle
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
      */
 
     public static void naytaHinnat() throws InterruptedException, FileNotFoundException {
-        Main.class.getResourceAsStream("resources\\hinnat.txt");
-        Scanner inputStream = new Scanner(new File("resources\\hinnat.txt"));
-        Scanner lukija = new Scanner(System.in);
-        String rivi = inputStream.nextLine();
+        Scanner hintaLukija = new Scanner(new File("resources\\hinnat.txt"));
+        String rivi = hintaLukija.nextLine();
 
-        while (inputStream.hasNextLine()){
-            rivi = inputStream.nextLine();
-            String[] taulu = rivi.split(";");
-            String tyyppi = taulu[0];
-            double litrahinta = Double.parseDouble(taulu[1]);
+        while (hintaLukija.hasNextLine()){ // Toistetaan niin kauan, kun hintaLukija saa uuden arvon
+            rivi = hintaLukija.nextLine(); // Luetaan hintatieto täydellisenä muuttujaan rivi
+            String[] taulu = rivi.split(";"); // Katkaistaan tiedot ";" merkin kohdalta ja sijoitetaan arvot muuttujaan nimeltään taulu
+            String tyyppi = taulu[0]; // Määritetään tyypiksi taulun 1. alkio
+            double litrahinta = Double.parseDouble(taulu[1]); // Määritetään litrahinta taulukon 2. alkiosta
 
             System.out.println("Tuotteen " + tyyppi + " litrahinta tolpassa on " + litrahinta + " euroa litralta.");
         }
-        haluatkoJatkaa();
+        haluatkoJatkaa(); // Näytä kysymys käyttäjälle, jatketaanko ohjelman suorittamista vai ei
     }
 
     /**
-     * Haluatko jatkaa.
+     * Haluatko jatkaa. Esitetään käyttäjälle kysymys, haluaako hän jatkaa ohjelman käyttämistä vai ei
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
@@ -193,18 +179,19 @@ public class Main {
         System.out.println("Haluatko jatkaa ohjelman suorittamista? y/n");
 
         String vastaus = lukija.nextLine();
+        String muunnaVastaus = vastaus.toLowerCase(); // Muokataan käyttäjän syöte siten, että ei ole väliä kuinka käyttäjä syöttää arvon, se hyväksytään aina
 
-        if (vastaus.equals("y")){
+        if (muunnaVastaus.equals("y")){
             paaValikko();
         }
 
-        if (vastaus.equals("n")){
+        if (muunnaVastaus.equals("n")){
             nakemiin();
         }
     }
 
     /**
-     * Nakemiin.
+     * Nakemiin. Ilmoittaa käyttäjälle ohjelman lopettamisesta ja sulkee suoritettavan ohjelman.
      *
      * @throws InterruptedException the interrupted exception
      */
@@ -212,6 +199,6 @@ public class Main {
     public static void nakemiin() throws InterruptedException {
         System.out.println("Suljetaan ohjelma turvallisesti");
         Thread.sleep(2000);
-        System.exit(1);
+        System.exit(1); // Lopetetaan ohjelman suorittaminen
     }
 }

@@ -56,7 +56,6 @@ public class Main {
             paaValikko(); // Avataan metodi paaValikko();
         }
 
-
     /**
      * PaaValikko. Nöytetään ohjelman päävalikko, josta voidaan valita toiminnallisuudet
      *

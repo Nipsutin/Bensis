@@ -1,0 +1,5 @@
+Tulevat
+ - Virheilmoitusten lisääminen ja selkeyttäminen
+ - Kommentoinnin selkeyttäminen
+ - JavaDoc -kommentoinnin lisääminen ja selkeyttäminen
+ - Ohjelman testaus

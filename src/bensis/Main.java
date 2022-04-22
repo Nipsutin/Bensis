@@ -40,11 +40,8 @@ public class Main {
         do {
             System.out.print("Anna salasanasi: ");
             syote = String.valueOf(System.console().readPassword());
-            if (syote.equals("Keke")){
-                System.out.println("Tervetuloa järjestelmään!");
-            }
-            else{
-                System.out.println("Syötit väärän salasanan!");
+            if (!syote.equals(passu)){
+                System.out.println("Syötit väärän salasanan. Koitahan uudelleen!");
             }
         }
         while (!syote.equals(passu));

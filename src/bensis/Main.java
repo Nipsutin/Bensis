@@ -57,7 +57,6 @@ public class Main {
         }
 
 
-
     /**
      * PaaValikko. Nöytetään ohjelman päävalikko, josta voidaan valita toiminnallisuudet
      *

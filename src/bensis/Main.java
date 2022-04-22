@@ -40,23 +40,26 @@ public class Main {
         do {
             System.out.print("Anna salasanasi: ");
             syote = String.valueOf(System.console().readPassword());
-
+            if (syote.equals("Keke")){
+                System.out.println("Tervetuloa järjestelmään!");
+            }
+            else{
+                System.out.println("Syötit väärän salasanan!");
+            }
         }
-
         while (!syote.equals(passu));
+            String onnistunut = "\nKirjautuminen onnistui"; // Määritetään teksti, joka tullaan näyttämään käyttäjälle kirjautumisen onnistuttua
+            int laskeKirjaimet = onnistunut.length(); // Lasketaan onnistunut - merkkimäärä
+            for (int i = 0; i < laskeKirjaimet; i++) {
+                System.out.print("="); // Tulostetaan yhtäsuurimerkit kirjautumisen onnistumisen kunniaksi tekstin alle
+            }
+            System.out.println(onnistunut); // Annetaan onnistunut tekstisyöte käyttäjälle
+            Thread.sleep(1000); // Odotetaan sekuntti ennen päävalikon avaamista
 
-        String onnistunut = "\nKirjautuminen onnistui"; // Määritetään teksti, joka tullaan näyttämään käyttäjälle kirjautumisen onnistuttua
-
-        int laskeKirjaimet = onnistunut.length(); // Lasketaan onnistunut - merkkimäärä
-        for (int i = 0; i < laskeKirjaimet; i++) {
-            System.out.print("="); // Tulostetaan yhtäsuurimerkit kirjautumisen onnistumisen kunniaksi tekstin alle
+            paaValikko(); // Avataan metodi paaValikko();
         }
 
-        System.out.println(onnistunut); // Annetaan onnistunut tekstisyöte käyttäjälle
-        Thread.sleep(1000); // Odotetaan sekuntti ennen päävalikon avaamista
 
-        paaValikko(); // Avataan metodi paaValikko();
-    }
 
     /**
      * PaaValikko. Nöytetään ohjelman päävalikko, josta voidaan valita toiminnallisuudet
@@ -86,8 +89,6 @@ public class Main {
                     Thread.sleep(400);
                 }
                 System.out.println("\nLataus suoritettu onnistuneesti\n"); // Näytetään onnistunut latausviesti
-
-
                 naytaHinnat(); // Haetaan hinnat naytaHinnat(); metodilla
             }
 
@@ -105,12 +106,10 @@ public class Main {
             System.out.println("Virheellinen valinta, valitse numero väliltä 1-3");
             paaValikko();
         } catch (InterruptedException | FileNotFoundException e) {
-            System.out.println("Virhe");
+            System.out.println("Virhe, tiedostoa ei löydy");
             paaValikko();
         }
     }
-
-
     /**
      * Syota hinnat. Metodissa käyttäjä pystyy syöttämään päivitettävät hinnat järjestelmän ohjeistaessa käyttäjän läpi päivitysprosessista
      *
@@ -124,14 +123,10 @@ public class Main {
         try{
         System.out.print("Anna laadun 95 uusi hinta: ");
         double ysiviisuusi = hintapaivittaja.nextDouble();
-
-
         System.out.print("Anna laadun 98 uusi hinta: ");
         double ysikasiuusi = hintapaivittaja.nextDouble();
-
         System.out.print("Anna laadun diesel uusi hinta: ");
         double dieseluusi = hintapaivittaja.nextDouble();
-
 
             File uudethinnat = new File("resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
             PrintWriter kirjoita = new PrintWriter(uudethinnat);
@@ -146,14 +141,11 @@ public class Main {
             System.out.println("Virheellinen syöte, hintojen syöttö aloitetaan alusta. \nSyötäthän pelkästään numeroita sekä käytät desimaalierottimena pilkkua!");
             syotaHinnat();
         }
-
-
         System.out.println("Hinnat päivitetty tolpalle.\n");
         Thread.sleep(500);
         naytaHinnat();
         haluatkoJatkaa(); // Näytä kysymys käyttäjälle, jatketaanko ohjelman suorittamista vai ei
     }
-
     /**
      * Nayta hinnat. Haetaan käyttäjälle hinnat tiedostosta, pilkotaan tiedosto osiin ja tulostetaan käyttäjälle
      *

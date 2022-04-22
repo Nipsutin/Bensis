@@ -116,20 +116,20 @@ public class Main {
         Scanner hintapaivittaja = new Scanner(System.in);
 
         try{
-        System.out.print("Anna laadun 95 uusi hinta: ");
-        double ysiviisuusi = hintapaivittaja.nextDouble();
-        System.out.print("Anna laadun 98 uusi hinta: ");
-        double ysikasiuusi = hintapaivittaja.nextDouble();
-        System.out.print("Anna laadun diesel uusi hinta: ");
-        double dieseluusi = hintapaivittaja.nextDouble();
+            System.out.print("Anna laadun 95 uusi hinta: ");
+            double ysiviisuusi = hintapaivittaja.nextDouble();
+            System.out.print("Anna laadun 98 uusi hinta: ");
+            double ysikasiuusi = hintapaivittaja.nextDouble();
+            System.out.print("Anna laadun diesel uusi hinta: ");
+            double dieseluusi = hintapaivittaja.nextDouble();
 
-            File uudethinnat = new File("resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
-            PrintWriter kirjoita = new PrintWriter(uudethinnat);
-            kirjoita.write("\n");
-            kirjoita.write("95;"+ysiviisuusi+"\n");
-            kirjoita.write("98;"+ysikasiuusi+"\n");
-            kirjoita.write("Diesel;"+dieseluusi+"\n");
-            kirjoita.close(); // Suljetaan kirjoitin kirjoituksen päättymisen myötä ja tallennetaan tiedot
+                File uudethinnat = new File("resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
+                PrintWriter kirjoita = new PrintWriter(uudethinnat);
+                kirjoita.write("\n");
+                kirjoita.write("95;"+ysiviisuusi+"\n");
+                kirjoita.write("98;"+ysikasiuusi+"\n");
+                kirjoita.write("Diesel;"+dieseluusi+"\n");
+                kirjoita.close(); // Suljetaan kirjoitin kirjoituksen päättymisen myötä ja tallennetaan tiedot
         }
 
         catch (InputMismatchException e) {
@@ -179,13 +179,18 @@ public class Main {
         String vastaus = lukija.nextLine();
         String muunnaVastaus = vastaus.toLowerCase(); // Muokataan käyttäjän syöte siten, että ei ole väliä kuinka käyttäjä syöttää arvon, se hyväksytään aina
 
-        if (muunnaVastaus.equals("y")){
-            paaValikko();
-        }
+    if (muunnaVastaus.equals("y")){
+        paaValikko();
+    }
 
-        if (muunnaVastaus.equals("n")){
-            nakemiin();
-        }
+    if (muunnaVastaus.equals("n")){
+        nakemiin();
+    }
+
+    if (!muunnaVastaus.equals("y") || !muunnaVastaus.equals("n")){
+        System.out.println("Virheellinen syöte, korjaathan syötteesi!");
+        haluatkoJatkaa();
+    }
     }
 
     /**

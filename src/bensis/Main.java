@@ -4,7 +4,9 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * The type Main.
+ * @author Malila, Käyhkö
+ * @version 1.0
+ * @since 0.1
  */
 
 public class Main {
@@ -28,7 +30,7 @@ public class Main {
     }
 
     /**
-     * Lue kirjautuminen. Käyttäjältä kysytään salasana, ja mikäli se syötetään oikein, näytetään päävalikko. Jos salasana näytetään väärin, mennään takaisin salasanan syöttöön.
+     * Käyttäjältä kysytään salasana, ja mikäli se syötetään oikein, näytetään päävalikko. Jos salasana näytetään väärin, mennään takaisin salasanan syöttöön.
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
@@ -57,12 +59,11 @@ public class Main {
         }
 
     /**
-     * PaaValikko. Nöytetään ohjelman päävalikko, josta voidaan valita toiminnallisuudet
+     * Näytetään ohjelman päävalikko, josta voidaan valita toiminnallisuudet
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
      */
-
     public static void paaValikko() throws InterruptedException, FileNotFoundException {
 
         System.out.println("Valitse toiminto");
@@ -106,7 +107,7 @@ public class Main {
         }
     }
     /**
-     * Syota hinnat. Metodissa käyttäjä pystyy syöttämään päivitettävät hinnat järjestelmän ohjeistaessa käyttäjän läpi päivitysprosessista
+     * Metodissa käyttäjä pystyy syöttämään päivitettävät hinnat järjestelmän ohjeistaessa käyttäjän läpi päivitysprosessista
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
@@ -142,7 +143,7 @@ public class Main {
         haluatkoJatkaa(); // Näytä kysymys käyttäjälle, jatketaanko ohjelman suorittamista vai ei
     }
     /**
-     * Nayta hinnat. Haetaan käyttäjälle hinnat tiedostosta, pilkotaan tiedosto osiin ja tulostetaan käyttäjälle
+     * Haetaan käyttäjälle hinnat tiedostosta, pilkotaan tiedosto osiin ja tulostetaan käyttäjälle
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception
@@ -165,7 +166,7 @@ public class Main {
     }
 
     /**
-     * Haluatko jatkaa. Esitetään käyttäjälle kysymys, haluaako hän jatkaa ohjelman käyttämistä vai ei
+     * Esitetään käyttäjälle kysymys, haluaako hän jatkaa ohjelman käyttämistä vai ei
      *
      * @throws InterruptedException  the interrupted exception
      * @throws FileNotFoundException the file not found exception

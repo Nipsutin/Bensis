@@ -39,10 +39,11 @@ public class Main {
     public static void lueKirjautuminen() throws InterruptedException, FileNotFoundException {
 
         String passu = "Keke", syote;
+
         do {
             System.out.print("Anna salasanasi: ");
-            syote = String.valueOf(System.console().readPassword());
-            if (!syote.equals(passu)){
+            syote = String.valueOf(System.console().readPassword()); // Luetaan salasana konsolista siten, että salasanan syötteitä ei näytetä turvallisuussyistä
+            if (!syote.equals(passu)){ // Jos salasana ei vastaa esiasetettua, tulostetaan virheilmoitus
                 System.out.println("Syötit väärän salasanan. Koitahan uudelleen!");
             }
         }
@@ -177,7 +178,7 @@ public class Main {
         Scanner lukija = new Scanner(System.in);
         System.out.println("Haluatko jatkaa ohjelman suorittamista? y/n");
 
-        String vastaus = lukija.nextLine();
+        String vastaus = lukija.nextLine(); // Luetaan käyttäjän vastaus
         String muunnaVastaus = vastaus.toLowerCase(); // Muokataan käyttäjän syöte siten, että ei ole väliä kuinka käyttäjä syöttää arvon, se hyväksytään aina
 
     if (muunnaVastaus.equals("y")){

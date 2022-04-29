@@ -125,7 +125,7 @@ public class Main {
             System.out.print("Anna laadun diesel uusi hinta: ");
             double dieseluusi = hintapaivittaja.nextDouble();
 
-                File uudethinnat = new File("resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
+                File uudethinnat = new File("\\resources\\hinnat.txt"); // Määritetään tiedosto, johon muutokset tehdään
                 PrintWriter kirjoita = new PrintWriter(uudethinnat);
                 kirjoita.write("\n");
                 kirjoita.write("95;"+ysiviisuusi+"\n");
@@ -151,7 +151,7 @@ public class Main {
      */
 
     public static void naytaHinnat() throws InterruptedException, FileNotFoundException {
-        Scanner hintaLukija = new Scanner(new File("resources\\hinnat.txt"));
+        Scanner hintaLukija = new Scanner(new File("\\resources\\hinnat.txt"));
         String rivi;
         hintaLukija.nextLine();
 
